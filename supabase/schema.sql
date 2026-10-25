@@ -1,0 +1,44 @@
+create table public.admins (user_id uuid primary key references auth.users(id) on delete cascade);
+alter table public.admins enable row level security;
+revoke all on public.admins from anon,authenticated;
+grant select on public.admins to authenticated;
+create policy own_admin on public.admins for select to authenticated using(user_id=(select auth.uid()));
+create table public.periods(id uuid primary key default gen_random_uuid(),title text not null check(length(title) between 1 and 100),starts_on date not null,ends_on date not null,published boolean not null default false,created_at timestamptz not null default now(),check(ends_on>=starts_on),check(ends_on-starts_on<=92));
+create table public.offers(id uuid primary key default gen_random_uuid(),period_id uuid not null references public.periods(id) on delete cascade,name text not null check(length(name) between 1 and 180),detail text not null default '' check(length(detail)<=300),sale_date date not null,discount integer not null check(discount between 1 and 99),image_path text not null check(length(image_path)<=200),created_at timestamptz not null default now(),unique(period_id,sale_date));
+create index offers_period on public.offers(period_id);
+alter table public.periods enable row level security;
+alter table public.offers enable row level security;
+revoke all on public.periods,public.offers from anon,authenticated;
+grant select on public.periods,public.offers to anon,authenticated;
+grant insert,update,delete on public.periods,public.offers to authenticated;
+create policy public_periods on public.periods for select to anon,authenticated using(published or exists(select 1 from public.admins where user_id=(select auth.uid())));
+create policy admin_periods on public.periods for all to authenticated using(exists(select 1 from public.admins where user_id=(select auth.uid()))) with check(exists(select 1 from public.admins where user_id=(select auth.uid())));
+create policy public_offers on public.offers for select to anon,authenticated using(exists(select 1 from public.periods p where p.id=period_id and p.published) or exists(select 1 from public.admins where user_id=(select auth.uid())));
+create policy admin_offers on public.offers for all to authenticated using(exists(select 1 from public.admins where user_id=(select auth.uid()))) with check(exists(select 1 from public.admins where user_id=(select auth.uid())));
+create function public.validate_offer() returns trigger language plpgsql security invoker set search_path='' as $$begin
+if not exists(select 1 from public.periods where id=new.period_id and new.sale_date between starts_on and ends_on) then raise exception 'Дата товара вне периода'; end if;return new;end;$$;
+revoke execute on function public.validate_offer() from public,anon,authenticated;
+create trigger validate_offer before insert or update on public.offers for each row execute function public.validate_offer();
+create function public.publish_period(p_id uuid,p_publish boolean) returns void language plpgsql security invoker set search_path='' as $$begin
+if not exists(select 1 from public.admins where user_id=(select auth.uid())) then raise exception 'Доступ запрещён';end if;
+perform pg_advisory_xact_lock(990234);
+if p_publish then
+if not exists(select 1 from public.offers where period_id=p_id) then raise exception 'Сначала добавьте товары';end if;
+if exists(select 1 from public.periods p join public.periods q on p.starts_on<=q.ends_on and p.ends_on>=q.starts_on where p.id=p_id and q.id<>p_id and q.published) then raise exception 'Период пересекается с опубликованным';end if;
+end if; update public.periods set published=p_publish where id=p_id;end;$$;
+revoke execute on function public.publish_period(uuid,boolean) from public,anon;
+grant execute on function public.publish_period(uuid,boolean) to authenticated;
+create table public.visits(visit_key text primary key,day date not null,ip_hash text not null,created_at timestamptz not null default now());
+create index visits_day on public.visits(day);
+create index visits_rate on public.visits(day,ip_hash);
+alter table public.visits enable row level security;
+revoke all on public.visits from anon,authenticated;
+grant select on public.visits to authenticated;
+create policy admin_visits on public.visits for select to authenticated using(exists(select 1 from public.admins where user_id=(select auth.uid())));
+create function public.visit_stats(p_from date,p_to date) returns table(day date,visits bigint) language sql stable security invoker set search_path='' as $$select d::date,count(v.visit_key) from generate_series(p_from::timestamp,p_to::timestamp,interval '1 day') d left join public.visits v on v.day=d::date where p_to-p_from between 0 and 366 group by d order by d;$$;
+revoke execute on function public.visit_stats(date,date) from public,anon;
+grant execute on function public.visit_stats(date,date) to authenticated;
+grant all on public.admins,public.periods,public.offers,public.visits to service_role;
+insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types) values('products','products',true,2097152,array['image/jpeg','image/png','image/webp']);
+create policy product_upload on storage.objects for insert to authenticated with check(bucket_id='products' and exists(select 1 from public.admins where user_id=(select auth.uid())));
+create policy product_read_admin on storage.objects for select to authenticated using(bucket_id='products' and exists(select 1 from public.admins where user_id=(select auth.uid())));
