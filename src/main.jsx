@@ -54,4 +54,8 @@ return <div className="admin-shell"><aside className="sidebar"><Brand/><span cla
 }
 const isAdmin=new URLSearchParams(location.search).has('admin');
 createRoot(document.getElementById('root')).render(isAdmin?<Admin/>:<Buyer/>);
-if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{});});}
+if('serviceWorker'in navigator){
+let controlled=!!navigator.serviceWorker.controller,reloading=false;
+navigator.serviceWorker.addEventListener('controllerchange',()=>{if(controlled&&!reloading&&!new URLSearchParams(location.search).has('admin')){reloading=true;location.reload();}controlled=true;});
+window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{let checked=0;const check=()=>{if(document.visibilityState==='visible'&&Date.now()-checked>60000){checked=Date.now();reg.update().catch(()=>{});}};document.addEventListener('visibilitychange',check);window.addEventListener('online',check);check();}).catch(()=>{});});
+}
