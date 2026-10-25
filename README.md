@@ -23,7 +23,7 @@ Supabase: https://supabase.com/dashboard/project/saeywokxwhrvfrwdrmjx
 
 ## Локальный запуск
 
-Node.js 22+, `npm ci`, `npm run dev`. Сборка: `npm run build`; результат `dist/`. Тесты: `npm test`. Браузерные проверки: `node tests/browser.mjs` при работающем сервере на 5173 и установленном Chromium (`npx playwright install chromium`).
+Node.js 22+, `npm ci`, `npm run dev`. Сборка: `npm run build`; результат `dist/`. Тесты: `npm test`. Браузерные проверки: `node tests/browser.mjs` с установленным Chromium; проверка сама запускает локальный сервер на 4173 (`npx playwright install chromium`).
 
 Конфигурация содержит только общедоступный publishable key и legacy anon JWT для JWT-проверки Edge Function. Секретных service_role ключей и паролей в репозитории нет.
 
@@ -42,7 +42,7 @@ Node.js 22+, `npm ci`, `npm run dev`. Сборка: `npm run build`; резул�
 
 `dist/` можно разместить на любом HTTPS-хостинге статических файлов. Вход в админку использует пароль и не требует email redirect. Бесплатный GitHub Pages требует публичного репозитория в обычной учётной записи. Перевод репозитория в публичный и выпуск покупательской ссылки ожидают отдельного согласия владельца.
 
-Для GitHub Pages: Settings → Pages → Deploy from a branch → main → /docs. В репозиторий включена готовая сборка в `docs/`; после изменений выполнить `npm run build` и обновить `docs/` содержимым `dist/`.
+Для GitHub Pages: Settings → Pages → Deploy from a branch → main → /docs. В репозиторий включена готовая сборка в `docs/`; после изменений выполнить `npm run package` и сохранить обновлённую папку `docs/` в GitHub.
 
 Если меняется домен сайта, добавьте его origin в `supabase/functions/visit/index.ts` и повторно разверните функцию. Настроенный origin: `https://nemozhenkov-cmd.github.io`.
 
