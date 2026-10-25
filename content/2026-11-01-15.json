@@ -1,0 +1,213 @@
+{
+  "title": "1–15 ноября 2026",
+  "starts_on": "2026-11-01",
+  "ends_on": "2026-11-15",
+  "published": false,
+  "source": {
+    "library_file_id": "libfile_fcb8f1fbb3c8819188ef38c59ed6f42d",
+    "filename": "collage15photos1792857059523.jpg",
+    "sha256": "85f9e1bfc81c001ae8256d5a4ed5a44a2830d6f213bb28b509ec6eb535ec9eb5",
+    "dimensions": [
+      2048,
+      1448
+    ],
+    "processing": "Lossless PNG crops on original 5×3 cell boundaries. No resize, retouching or generation."
+  },
+  "offers": [
+    {
+      "sale_date": "2026-11-01",
+      "name": "Крем-мыло DELIVEA",
+      "detail": "Уход и увлажнение, 0,75 л",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/01.png",
+      "source_crop": [
+        0,
+        0,
+        410,
+        483
+      ]
+    },
+    {
+      "sale_date": "2026-11-02",
+      "name": "Сливки СВЕТАЕВО",
+      "detail": "33%, БЗМЖ, 500 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/02.png",
+      "source_crop": [
+        410,
+        0,
+        819,
+        483
+      ]
+    },
+    {
+      "sale_date": "2026-11-03",
+      "name": "Антиперспирант DELIVEA Men Total",
+      "detail": "200 мл",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/03.png",
+      "source_crop": [
+        819,
+        0,
+        1229,
+        483
+      ]
+    },
+    {
+      "sale_date": "2026-11-04",
+      "name": "Мини-пицца БОН МЕНЮ Пепперони",
+      "detail": "250 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/04.png",
+      "source_crop": [
+        1229,
+        0,
+        1638,
+        483
+      ]
+    },
+    {
+      "sale_date": "2026-11-05",
+      "name": "Салфетки DANKE! универсальные",
+      "detail": "Микрофибра, 30 × 30 см, 5 шт.",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/05.png",
+      "source_crop": [
+        1638,
+        0,
+        2048,
+        483
+      ]
+    },
+    {
+      "sale_date": "2026-11-06",
+      "name": "Крем-паста ДИКОЕ МОРЕ",
+      "detail": "С антарктическим крилем и кальмаром, 150 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/06.png",
+      "source_crop": [
+        0,
+        483,
+        410,
+        965
+      ]
+    },
+    {
+      "sale_date": "2026-11-07",
+      "name": "Конфеты DELIBON Peanut & Caramel",
+      "detail": "С арахисом и солёной карамелью, 200 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/07.png",
+      "source_crop": [
+        410,
+        483,
+        819,
+        965
+      ]
+    },
+    {
+      "sale_date": "2026-11-08",
+      "name": "Зубная паста ACTIDENT Professional White",
+      "detail": "Отбеливающая, 125 мл",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/08.png",
+      "source_crop": [
+        819,
+        483,
+        1229,
+        965
+      ]
+    },
+    {
+      "sale_date": "2026-11-09",
+      "name": "Кофе LAVESKO Premium Blend",
+      "detail": "Молотый, 250 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/09.png",
+      "source_crop": [
+        1229,
+        483,
+        1638,
+        965
+      ]
+    },
+    {
+      "sale_date": "2026-11-10",
+      "name": "Чипсы BRUNCHERS с солью",
+      "detail": "250 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/10.png",
+      "source_crop": [
+        1638,
+        483,
+        2048,
+        965
+      ]
+    },
+    {
+      "sale_date": "2026-11-11",
+      "name": "Карбонад ВЕРНЕР",
+      "detail": "150 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/11.png",
+      "source_crop": [
+        0,
+        965,
+        410,
+        1448
+      ]
+    },
+    {
+      "sale_date": "2026-11-12",
+      "name": "Томатная паста GREENOLA",
+      "detail": "25%, 380 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/12.png",
+      "source_crop": [
+        410,
+        965,
+        819,
+        1448
+      ]
+    },
+    {
+      "sale_date": "2026-11-13",
+      "name": "Масло МИОРЕ льняное",
+      "detail": "250 мл",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/13.png",
+      "source_crop": [
+        819,
+        965,
+        1229,
+        1448
+      ]
+    },
+    {
+      "sale_date": "2026-11-14",
+      "name": "Платочки TAFO Deluxe",
+      "detail": "Бумажные, трёхслойные, 100 шт.",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/14.png",
+      "source_crop": [
+        1229,
+        965,
+        1638,
+        1448
+      ]
+    },
+    {
+      "sale_date": "2026-11-15",
+      "name": "Мармелад DELIBON «Кислый ремешка»",
+      "detail": "Фруктовый микс, 150 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/15.png",
+      "source_crop": [
+        1638,
+        965,
+        2048,
+        1448
+      ]
+    }
+  ]
+}
