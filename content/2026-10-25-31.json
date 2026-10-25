@@ -1,0 +1,108 @@
+{
+  "title": "25–31 октября 2026",
+  "starts_on": "2026-10-25",
+  "ends_on": "2026-10-31",
+  "published": false,
+  "source": {
+    "library_file_id": "libfile_90250716fee481919966f15e601fa741",
+    "filename": "collage16photos1792267285692.jpg",
+    "dimensions": [
+      2048,
+      2048
+    ],
+    "processing": "Lossless crops from original 4×4 collage; no resizing, retouching or generation."
+  },
+  "offers": [
+    {
+      "sale_date": "2026-10-25",
+      "name": "Прокладки INTUREL Night",
+      "detail": "Женские гигиенические, 14 шт.",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/25.webp",
+      "source_crop": [
+        512,
+        1024,
+        1024,
+        1536
+      ]
+    },
+    {
+      "sale_date": "2026-10-26",
+      "name": "Сырники БОН МЕНЮ классические",
+      "detail": "240 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/26.webp",
+      "source_crop": [
+        1024,
+        1024,
+        1536,
+        1536
+      ]
+    },
+    {
+      "sale_date": "2026-10-27",
+      "name": "Печенье DELIBON Американер",
+      "detail": "400 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/27.webp",
+      "source_crop": [
+        1536,
+        1024,
+        2048,
+        1536
+      ]
+    },
+    {
+      "sale_date": "2026-10-28",
+      "name": "Борщ БОН МЕНЮ с говядиной",
+      "detail": "Замороженный, 300 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/28.webp",
+      "source_crop": [
+        0,
+        1536,
+        512,
+        2048
+      ]
+    },
+    {
+      "sale_date": "2026-10-29",
+      "name": "Шарики DELIBON шоколадные",
+      "detail": "500 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/29.webp",
+      "source_crop": [
+        512,
+        1536,
+        1024,
+        2048
+      ]
+    },
+    {
+      "sale_date": "2026-10-30",
+      "name": "Платочки TAFO",
+      "detail": "Бумажные гигиенические, 3 слоя, 100 шт.",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/30.webp",
+      "source_crop": [
+        1024,
+        1536,
+        1536,
+        2048
+      ]
+    },
+    {
+      "sale_date": "2026-10-31",
+      "name": "Нектар GREENOLA вишня–черешня",
+      "detail": "0,95 л",
+      "discount": 20,
+      "image_path": "brand/products/2026-10/31.webp",
+      "source_crop": [
+        1536,
+        1536,
+        2048,
+        2048
+      ]
+    }
+  ]
+}
