@@ -1,5 +1,5 @@
-const VERSION='chizhik-calendar-375b24f9af61';
-const CORE=["./assets/index-REfz5zET.js","./assets/index-BsxvaCxQ.css"].concat(['./','./index.html','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./badge-96.png','./brand/logo.svg','./brand/mascot-welcome.webp','./brand/mascot-update.webp','./brand/mascot-loading.webp']);
+const VERSION='chizhik-calendar-ca388294234c';
+const CORE=["./assets/index-Dty0Z3y1.js","./assets/index-D3G_cc5X.css"].concat(['./','./index.html','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./badge-96.png','./brand/logo.svg','./brand/mascot-welcome.webp','./brand/mascot-update.webp','./brand/mascot-loading.webp']);
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const c=await caches.open(VERSION);await Promise.all(CORE.map(async url=>{try{const r=await fetch(url);if(r.ok)await c.put(url,r);}catch{}}));await self.skipWaiting();})());});
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('chizhik-calendar-')&&key!==VERSION)await caches.delete(key);await self.clients.claim();})()));
 self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET')return;
