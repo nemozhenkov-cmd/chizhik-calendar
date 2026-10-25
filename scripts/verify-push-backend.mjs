@@ -8,5 +8,11 @@ for(const action of ['broadcast','admin-status']){const r=await post({action,per
 assert.equal((await post({action:'worker'})).status,401);
 assert.equal((await post({action:'subscribe',subscription:{endpoint:'https://127.0.0.1/'},device_token:'x'})).status,400);
 assert.equal((await post({action:'config'},{Origin:'https://evil.invalid'})).status,403);
-for(const table of ['push_config','push_subscriptions','push_broadcasts','push_deliveries']){const r=await fetch(SUPABASE_URL+'/rest/v1/'+table+'?select=*',{headers});assert.ok([401,403].includes(r.status),`${table} must be private`);}
+for(const table of ['push_config','push_subscriptions','push_broadcasts','push_deliveries','push_reminders']){const r=await fetch(SUPABASE_URL+'/rest/v1/'+table+'?select=*',{headers});assert.ok([401,403].includes(r.status),`${table} must be private`);}
 console.log('PASS: public VAPID key only; anonymous broadcasts/worker/private table reads rejected; invalid subscriptions and foreign origins rejected. No real notification sent.');
+
+for(const action of ['reminder','reminders'])assert.equal((await post({action,subscription:{},device_token:'x'})).status,400);
+
+const {createECDH,randomBytes}=await import('node:crypto');const ec=createECDH('prime256v1');const unknown={endpoint:'https://fcm.googleapis.com/fcm/send/UNOWNED-TEST-NO-DELIVERY',keys:{p256dh:ec.generateKeys().toString('base64url'),auth:randomBytes(16).toString('base64url')}};
+for(const action of ['reminder','reminders'])assert.equal((await post({action,subscription:unknown,device_token:'f'.repeat(64),offer_id:'00000000-0000-4000-8000-000000000000',enabled:true})).status,403);
+console.log('PASS: reminder operations reject unowned subscriptions; private reminder table cannot be read.');
