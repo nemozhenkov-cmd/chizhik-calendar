@@ -29,3 +29,19 @@
 .offer-bundle{min-width:0}.hero-bundle{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden}.hero-bundle .hero-card{border:0;box-shadow:none}.hero-bundle>.coupon-action{border:0;background:white;margin:0;padding:0 20px 16px;border-radius:0}.hero-bundle .offer-card-shell>.favorite-button{top:12px;right:12px;bottom:auto}.hero-bundle .discount{right:54px}.hero-bundle .offer-link{padding-right:0}.hero-bundle .condition{background:none;border:0;padding:0;gap:0}.hero-bundle .condition>svg{display:none}.today-intro{min-height:80px;margin-bottom:14px}.today-intro h1{font-size:34px;white-space:nowrap}.today-intro h1 span{display:inline-block}.today-intro .mascot-wrap{position:static;width:85px;min-width:0}.today-intro .mascot-wrap img{width:80px;height:80px}.today-intro .bubble{display:none}.today-date{font-size:16px;margin-bottom:8px}
 @media(max-width:700px){.buyer{padding-top:10px}.today-intro{min-height:76px;align-items:center;gap:6px}.today-intro>div{max-width:none;padding:0}.today-intro h1{font-size:29px;letter-spacing:-1px}.today-intro .mascot-wrap{position:static;width:72px;flex-shrink:0}.today-intro .mascot-wrap img{width:72px;height:72px}.today-date{font-size:15px;margin-bottom:7px}.today-layout .hero-card,.selected-panel .hero-card{padding:12px 16px 0;gap:9px}.today-layout .hero-card .offer-photo,.selected-panel .hero-card .offer-photo{height:clamp(145px,26svh,200px);min-height:0}.hero-bundle .hero-card .offer-copy h2{font-size:22px;line-height:1.15}.hero-bundle .hero-card .offer-copy p{font-size:12px;margin-top:4px}.hero-bundle .hero-card .condition{margin-top:9px}.hero-bundle .hero-card .offer-link{margin-top:9px;padding-top:8px;padding-bottom:9px}.hero-bundle .hero-card .discount{font-size:27px;right:43px;padding:7px 10px}.hero-bundle .product-label{font-size:9px;padding:6px}.hero-bundle>.coupon-action{padding:0 16px 12px}.hero-bundle .coupon-open{font-size:12px;min-height:46px;padding:10px 7px}.hero-bundle .coupon-action p{font-size:10px;margin-top:5px}.hero-bundle .offer-card-shell>.favorite-button{top:10px;right:10px;width:36px;height:36px}.upcoming{margin-top:26px}}
 @media(max-width:350px){.today-intro h1{font-size:25px}.today-intro .mascot-wrap,.today-intro .mascot-wrap img{width:62px;height:62px}.hero-bundle .hero-card .offer-copy h2{font-size:20px}.hero-bundle .coupon-open{font-size:11px;gap:5px}}
+
+/* Share card and reminder tracks across each product row. */
+.product-grid>.reminder-offer{display:grid;grid-row:span 2;grid-template-rows:subgrid;gap:9px}
+.product-grid .offer-bundle{display:flex;flex-direction:column;height:100%}
+.product-grid .offer-card-shell{flex:1}
+.product-grid .offer-card{height:100%}
+.product-grid .offer-photo{flex-shrink:0}
+.product-grid .offer-copy{display:flex;flex:1;flex-direction:column}
+.product-grid .offer-copy .valid{margin-top:auto;padding-top:14px}
+.product-grid .offer-link{flex-shrink:0}
+.reminder-button{min-height:44px;padding:9px 10px;gap:7px}
+.reminder-button b{font-size:12px;line-height:1.3}
+.reminder-button:not(.reminder-active) b{white-space:nowrap}
+.reminder-button small{font-size:10px;line-height:1.3;margin-top:4px}
+@media(max-width:700px){.product-grid .reminder-button{padding:9px 5px;gap:5px}.product-grid .reminder-button svg{width:16px;height:16px}.product-grid .reminder-button b{font-size:11px}.product-grid .reminder-active b{font-size:11px}.product-grid .reminder-button small{font-size:10px}}
+@media(max-width:350px){.product-grid .reminder-button b{font-size:10px}.product-grid .reminder-button{gap:4px;padding-inline:4px}.product-grid .reminder-button svg{width:14px;height:14px}}
