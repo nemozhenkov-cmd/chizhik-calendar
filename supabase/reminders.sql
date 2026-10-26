@@ -52,7 +52,7 @@ select * into p from public.periods where id=p_period and published;
 if not found or not exists(select 1 from public.offers where period_id=p_period) then raise exception 'PUBLISH_FIRST';end if;
 select id into campaign from public.push_broadcasts where period_id=p_period;
 if found then return campaign;end if;
-insert into public.push_broadcasts(period_id,created_by,title,body,total) values(p_period,p_actor,'Чижик принёс новые скидки!',p.title||' · Выбирайте товары и планируйте покупки на Видова, 163В.',(select count(*) from public.push_subscriptions)) returning id into campaign;
+insert into public.push_broadcasts(period_id,created_by,title,body,total) values(p_period,p_actor,'Чижик принёс новые скидки!',p.title||' · Выбирайте товары и планируйте покупки.',(select count(*) from public.push_subscriptions)) returning id into campaign;
 insert into public.push_deliveries(broadcast_id,subscription_id) select campaign,id from public.push_subscriptions;
 return campaign;end;$$;
 
