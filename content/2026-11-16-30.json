@@ -3,7 +3,7 @@
   "starts_on": "2026-11-16",
   "ends_on": "2026-11-30",
   "published": false,
-  "processing": "Original pixels, lossless WebP; no resizing or retouching",
+  "processing": "Original photographs in lossless WebP except November 20: owner-approved generated two-pack composition, optimized WebP",
   "offers": [
     {
       "sale_date": "2026-11-16",
@@ -40,6 +40,15 @@
       "image_path": "brand/products/2026-11/19.webp",
       "source_filename": "image(20261027-091028).png",
       "source_sha256": "25ce555248e6c5567bfec4830169a9d69ce3edb0aacfd6c2c29ab5804a94f848"
+    },
+    {
+      "sale_date": "2026-11-20",
+      "name": "Печенье КАРУСЕЛИ сахарное",
+      "detail": "Черника и клюква, в ассортименте, 300 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/20.webp",
+      "source_type": "Owner-approved two-pack image composition",
+      "source_sha256": "6adefe0ec7dcc800bc405b013ee3ebfc851e70a35625ae30270dafe582bf46af"
     },
     {
       "sale_date": "2026-11-21",
@@ -132,10 +141,5 @@
       "source_sha256": "57d8475390d1b8aadf6b180202c075cf0735012073e1967b22c13fe360d565e1"
     }
   ],
-  "pending": [
-    {
-      "sale_date": "2026-11-20",
-      "reason": "List says blueberry and cranberry; photo says pieces of blueberry. Awaiting owner confirmation."
-    }
-  ]
+  "pending": []
 }
