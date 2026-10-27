@@ -1,5 +1,4 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {Forward} from 'lucide-react';
 import {shareOffer} from './share.mjs';
 
 function copyText(text){
@@ -19,5 +18,5 @@ export default function ShareButton({offer}){
     catch{setMessage('Не удалось поделиться. Попробуйте ещё раз.');}
     finally{setBusy(false);clearTimeout(timer.current);timer.current=setTimeout(()=>setMessage(''),4500);}
   }
-  return <><button type="button" className="share-button" aria-label={`Поделиться: ${offer.name}`} title="Поделиться" disabled={busy} onClick={share}><Forward size={21}/></button>{message&&<div className="share-toast" role="status">{message}</div>}</>;
+  return <><button type="button" className="share-button" aria-label={`Поделиться: ${offer.name}`} title="Поделиться" disabled={busy} onClick={share}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 10 14 3v4C7 7 3 11 3 20c3-5 6-7 11-7v4l7-7Z"/></svg></button>{message&&<div className="share-toast" role="status">{message}</div>}</>;
 }
