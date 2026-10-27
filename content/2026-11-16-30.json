@@ -1,0 +1,141 @@
+{
+  "title": "16–30 ноября 2026",
+  "starts_on": "2026-11-16",
+  "ends_on": "2026-11-30",
+  "published": false,
+  "processing": "Original pixels, lossless WebP; no resizing or retouching",
+  "offers": [
+    {
+      "sale_date": "2026-11-16",
+      "name": "Чай GREETINGS Classic",
+      "detail": "Чёрный байховый, 100 × 2 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/16.webp",
+      "source_filename": "image(10).png",
+      "source_sha256": "f71fd0fa972b127514bb65b5b478b45ccc52c09ebc167008a659e0a4f4bb17a3"
+    },
+    {
+      "sale_date": "2026-11-17",
+      "name": "Суп БОН МЕНЮ Солянка куриная",
+      "detail": "Замороженный, 300 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/17.webp",
+      "source_filename": "image(20261027-090920).png",
+      "source_sha256": "bcdc1e3f6a52a41c2bb320a607aeb6ca169de3fbe36a61d539e9be20b2059fb9"
+    },
+    {
+      "sale_date": "2026-11-18",
+      "name": "Котлеты ГРАНД МЕНЮ домашние",
+      "detail": "Замороженные, 450 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/18.webp",
+      "source_filename": "image(20261027-090926).png",
+      "source_sha256": "b1e855f6719823c94f3e971d2077633edb0c77519433f3a974ba65a21a678e30"
+    },
+    {
+      "sale_date": "2026-11-19",
+      "name": "Мармелад DELIBON ассорти",
+      "detail": "Желейный, 500 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/19.webp",
+      "source_filename": "image(20261027-091028).png",
+      "source_sha256": "25ce555248e6c5567bfec4830169a9d69ce3edb0aacfd6c2c29ab5804a94f848"
+    },
+    {
+      "sale_date": "2026-11-21",
+      "name": "Белизна AXL гель 3в1",
+      "detail": "700 мл",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/21.webp",
+      "source_filename": "image(20261027-091230).png",
+      "source_sha256": "f9b16454f03c535765048538e2050a25a36b08158ce41333bc087a564c3440f7"
+    },
+    {
+      "sale_date": "2026-11-22",
+      "name": "Карамель DELIBON Дворянка",
+      "detail": "С начинкой, 250 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/22.webp",
+      "source_filename": "image(20261027-091303).png",
+      "source_sha256": "8133328c138d11941f007c06771516bad34f32fece26a0ee7db62b38ee20a05f"
+    },
+    {
+      "sale_date": "2026-11-23",
+      "name": "Креветки ДИКОЕ МОРЕ Северные",
+      "detail": "120/150, варено-мороженые, 500 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/23.webp",
+      "source_filename": "image(20261027-091320).png",
+      "source_sha256": "81265fccbc69a174723f893fb831cf17194f601ce7cfb5f68aa08143e56ce59a"
+    },
+    {
+      "sale_date": "2026-11-24",
+      "name": "Курага FOODFEST",
+      "detail": "Абрикосы сушёные, 200 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/24.webp",
+      "source_filename": "image(20261027-091332).png",
+      "source_sha256": "8b0d3e4a45ddf93aa3df66a0734942f3f7180488cce0a681f4d6a03aa93814a5"
+    },
+    {
+      "sale_date": "2026-11-25",
+      "name": "Кальмар ДИКОЕ МОРЕ стружка",
+      "detail": "Сушёно-вяленый, 70 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/25.webp",
+      "source_filename": "image(20261027-091344).png",
+      "source_sha256": "d1adb8b76c329930db51856b1c0743eaa4bbe3ca917106f5c3de4e63caf6025f"
+    },
+    {
+      "sale_date": "2026-11-26",
+      "name": "Карпаччо ВЕРНЕР куриное",
+      "detail": "Сырокопчёное, 100 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/26.webp",
+      "source_filename": "image(20261027-091357).png",
+      "source_sha256": "baed32a0d59a4f22e69dea3942bb90cde53a1e75d6dbe35f345328844add1aaa"
+    },
+    {
+      "sale_date": "2026-11-27",
+      "name": "Напиток GREETINGS холодный чай",
+      "detail": "Чёрный с лимонным соком, 1 л",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/27.webp",
+      "source_filename": "image(20261027-091416).png",
+      "source_sha256": "c58ae3143d33597f0941736358d0c5b15d5c6ff391f2425326550cb14cffbd84"
+    },
+    {
+      "sale_date": "2026-11-28",
+      "name": "Печенье DELIBON Апельсин",
+      "detail": "Сдобное, 137 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/28.webp",
+      "source_filename": "image(20261027-091433).png",
+      "source_sha256": "7b04a9cb705b5d72793d25ff26bb8eae7dd2b14fe9903eece8cf03097664dd22"
+    },
+    {
+      "sale_date": "2026-11-29",
+      "name": "Икра GREENOLA",
+      "detail": "Из обжаренных баклажанов, 520 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/29.webp",
+      "source_filename": "image(20261027-091453).png",
+      "source_sha256": "7b1533143700b843cb7cc33c5ae1a7798d3104f5b4cc3ac8584f9e56668d0257"
+    },
+    {
+      "sale_date": "2026-11-30",
+      "name": "Капсулы LABINEL Color для стирки",
+      "detail": "Для цветного белья, 260 г",
+      "discount": 20,
+      "image_path": "brand/products/2026-11/30.webp",
+      "source_filename": "image(20261027-091511).png",
+      "source_sha256": "57d8475390d1b8aadf6b180202c075cf0735012073e1967b22c13fe360d565e1"
+    }
+  ],
+  "pending": [
+    {
+      "sale_date": "2026-11-20",
+      "reason": "List says blueberry and cranberry; photo says pieces of blueberry. Awaiting owner confirmation."
+    }
+  ]
+}
