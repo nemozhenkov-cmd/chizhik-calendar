@@ -56,3 +56,5 @@
 .detail-photo>.offer-actions{top:0;right:0}
 .detail-photo:has(>.offer-actions){padding-top:48px}
 .detail-photo:has(>.offer-actions)>.discount{top:58px}
+
+.push-issues{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}.push-issues li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}.push-issues li>b{font-size:12px;overflow-wrap:anywhere}.push-issues li p{font-size:12px;line-height:1.5;margin-top:6px;color:#55594c}
