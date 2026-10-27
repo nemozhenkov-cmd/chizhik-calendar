@@ -103,3 +103,7 @@ RLS запрещает покупателю читать статистику, �
 Ссылка предоставлена владельцем магазина: https://redirect.appmetrica.yandex.com/serve/389863811814811314 . Она используется на всех платформах. Окончательный запуск приложения контролирует ОС/браузер; запуск на физическом телефоне в автоматических проверках не проверяется.
 
 Главная уплотнена: компактный маскот, сердечко в углу карточки, действие открытия приложения внутри карточки. Ссылка AppMetrica предоставлена владельцем магазина и используется на всех платформах.
+
+### Sharing offers
+
+The home page's curved arrow shares today's offer; any full offer dialog shares its own date and product. The message includes the exact date (with year), discount, name and detail, coupon requirement, and the calendar link `https://clck.ru/3WgQiN`. Native Web Share is invoked directly from the tap. If unavailable or rejected (except user cancellation), the same text and URL are copied with a brief confirmation. This shares the calendar URL, not a product deep link. No notification or backend changes are required.

@@ -45,3 +45,14 @@
 .reminder-button small{font-size:10px;line-height:1.3;margin-top:4px}
 @media(max-width:700px){.product-grid .reminder-button{padding:9px 5px;gap:5px}.product-grid .reminder-button svg{width:16px;height:16px}.product-grid .reminder-button b{font-size:11px}.product-grid .reminder-active b{font-size:11px}.product-grid .reminder-button small{font-size:10px}}
 @media(max-width:350px){.product-grid .reminder-button b{font-size:10px}.product-grid .reminder-button{gap:4px;padding-inline:4px}.product-grid .reminder-button svg{width:14px;height:14px}}
+
+/* Compact actions stay outside the clickable product card. */
+.offer-actions{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;z-index:2}
+.offer-actions>.favorite-button,.share-button{position:static;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:#fff;color:#1c1c1b;flex-shrink:0}
+.offer-actions>.favorite-button.is-favorite{background:#fff6bd;color:#8c7400}
+.share-button:hover{background:#fff6bd}
+.share-toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:14px;background:#1c1c1b;color:#fff;font-size:13px;text-align:center;z-index:1000;box-shadow:0 4px 20px #0002}
+.offer-card-shell:has(>.offer-actions) .discount{top:58px;right:8px}
+.detail-photo>.offer-actions{top:0;right:0}
+.detail-photo:has(>.offer-actions){padding-top:48px}
+.detail-photo:has(>.offer-actions)>.discount{top:58px}
