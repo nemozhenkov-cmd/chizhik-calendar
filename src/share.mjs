@@ -7,7 +7,9 @@ export function offerShareData(offer){
   return {title:'Календарь скидок «Чижик»',text:`${date} скидка ${offer.discount}% на ${name}. Покажите купон из приложения «Чижик» на кассе. Подробнее в календаре:`,url:CALENDAR_SHARE_URL};
 }
 export async function shareOffer(offer,nav=navigator,copyFallback){
-  const data=offerShareData(offer);
+  return shareContent(offerShareData(offer),nav,copyFallback);
+}
+export async function shareContent(data,nav=navigator,copyFallback){
   if(typeof nav.share==='function'){
     try{await nav.share(data);return 'shared';}catch(error){if(error.name==='AbortError')return 'cancelled';}
   }

@@ -1,0 +1,88 @@
+{
+  "title": "Новинки недели",
+  "starts_on": "2026-10-26",
+  "ends_on": "2026-11-01",
+  "items": [
+    {
+      "name": "Напиток Molvest Protein Max",
+      "detail": "Гранат-малина, 240 г",
+      "description": "Обезжиренный безлактозный кисломолочный напиток.",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/01.webp",
+      "sort_order": 0,
+      "source_filename": "image(20261101-134145).png",
+      "source_sha256": "016d50bb67b9d26579114a36221e523c98cb220e4c57f6781aee060c874fd76e"
+    },
+    {
+      "name": "Сметана СВЕТАЕВО",
+      "detail": "15%, 300 г",
+      "description": "",
+      "catalog_url": "https://chizhik.club/product/smetana-svetaevo-15-300g--4427648/",
+      "image_path": "brand/new-arrivals/2026-11-01/02.webp",
+      "sort_order": 1,
+      "source_filename": "image(20261101-134226).png",
+      "source_sha256": "7c566db0b8fe7f33a0a798e49943f8bf27f1babcf7c172e138035448ec430bfc"
+    },
+    {
+      "name": "Сметана СВЕТАЕВО",
+      "detail": "20%, 300 г",
+      "description": "",
+      "catalog_url": "https://chizhik.club/product/smetana-svetaevo-20-bzmzh-300g--4427650/",
+      "image_path": "brand/new-arrivals/2026-11-01/03.webp",
+      "sort_order": 2,
+      "source_filename": "image(20261101-134224).png",
+      "source_sha256": "82063e3703eea4c1ce661232745a5b566b23a22cd0312369ec7480ac02df06ff"
+    },
+    {
+      "name": "Фарш ВЕРНЕР",
+      "detail": "Из индейки, 450 г",
+      "description": "",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/04.webp",
+      "sort_order": 3,
+      "source_filename": "image(20261101-134327).png",
+      "source_sha256": "2dfdf14af71f42fe2add0786c7361830d6596d862a55a6f50e09b9790ee768d3"
+    },
+    {
+      "name": "Пицца Fratelini Пепперони",
+      "detail": "Римская, 300 г",
+      "description": "",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/05.webp",
+      "sort_order": 4,
+      "source_filename": "image(20261101-134433).png",
+      "source_sha256": "7f9bfd34a3b25bc733c95f2085f071b552a4446092101c0e55925b000be586b7"
+    },
+    {
+      "name": "Пицца Fratelini 4 сыра",
+      "detail": "Римская, 300 г",
+      "description": "",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/06.webp",
+      "sort_order": 5,
+      "source_filename": "image(20261101-134430).png",
+      "source_sha256": "269b6ea4e1504d59fa86e02f8d08a5c868b6dd9a860657c64bded941d9e6b08b"
+    },
+    {
+      "name": "Салфетки TAFO",
+      "detail": "Влажные универсальные, 32 шт. (4 × 8)",
+      "description": "",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/07.webp",
+      "sort_order": 6,
+      "source_filename": "image(20261101-134537).png",
+      "source_sha256": "ad8c1ec816b1156998b1636b4291c4983f7e50bed3e51821e15193f033cf42e6"
+    },
+    {
+      "name": "Мыло DELIVEA Банное",
+      "detail": "Туалетное твёрдое, с глицерином, 150 г",
+      "description": "",
+      "catalog_url": "",
+      "image_path": "brand/new-arrivals/2026-11-01/08.webp",
+      "sort_order": 7,
+      "source_filename": "image(20261101-134731).png",
+      "source_sha256": "1406a690c106ddcfb0ae752091ceec344b4acacdcf4d438d94fbcc2893e98e3a"
+    }
+  ],
+  "processing": "Original photos, lossless WebP, no resize or retouching"
+}

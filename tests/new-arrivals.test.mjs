@@ -1,0 +1,6 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {catalogLink,newShareData,sortedNewItems} from '../src/new-arrivals.mjs';
+test('only direct official product URLs are accepted',()=>{assert.ok(catalogLink('https://chizhik.club/product/smetana--4427648/'));for(const s of ['javascript:alert(1)','https://chizhik.club.evil.invalid/product/a/','https://evil@chizhik.club/product/a/','https://chizhik.club/product/a/?redirect=evil','https://chizhik.club/catalog/'])assert.equal(catalogLink(s),'');});
+test('new arrival shares never claim a discount or coupon',()=>{const data=newShareData({name:'Сметана',detail:'15% · 300 г'});assert.match(data.text,/Новинка/);assert.doesNotMatch(data.text,/скидка|купон/i);assert.equal(data.url,'https://clck.ru/3WgQiN#new');const items=[{name:'Б',sort_order:2},{name:'А',sort_order:1}];assert.equal(sortedNewItems(items)[0].name,'А');assert.equal(items[0].name,'Б');});
+
+import {pushPayload} from '../supabase/functions/calendar-push/policy.mjs';
+test('new arrivals push opens new tab, calendar keeps its own destination',()=>{assert.match(pushPayload({broadcast_id:'x',period_id:null,title:'Н',body:'Т'}).url,/#new$/);assert.match(pushPayload({broadcast_id:'x',period_id:'p',title:'К',body:'Т'}).url,/#calendar$/);});

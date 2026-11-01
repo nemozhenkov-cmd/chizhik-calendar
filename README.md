@@ -104,6 +104,5 @@ RLS запрещает покупателю читать статистику, �
 
 Главная уплотнена: компактный маскот, сердечко в углу карточки, действие открытия приложения внутри карточки. Ссылка AppMetrica предоставлена владельцем магазина и используется на всех платформах.
 
-### Sharing offers
-
-The home page's curved arrow shares today's offer; any full offer dialog shares its own date and product. The message includes the exact date (with year), discount, name and detail, coupon requirement, and the calendar link `https://clck.ru/3WgQiN`. Native Web Share is invoked directly from the tap. If unavailable or rejected (except user cancellation), the same text and URL are copied with a brief confirmation. This shares the calendar URL, not a product deep link. No notification or backend changes are required.
+### Новинки недели
+Четвёртый раздел `#new`: еженедельные подборки из `new_collections` / `new_items`, оригинальные фото, отдельные варианты товара, без сердечек и скидочных плашек. Поделиться — справа сверху. Ссылка «Подробнее о товаре» допускает только прямую HTTPS-страницу `chizhik.club/product/.../`; при отсутствии проверенной ссылки кнопка скрыта. Управление: админка → Новинки → подборка, товары, предпросмотр, публикация. Все отправки о подборке запускаются отдельной подтверждаемой кнопкой, один раз на подборку; используется существующая защищённая очередь. `push_broadcasts` содержит ровно один источник: календарь или подборку новинок. Миграции: `supabase/new-arrivals.sql`, `supabase/new-arrivals-push.sql`.

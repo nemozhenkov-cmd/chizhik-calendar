@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {shareOffer} from './share.mjs';
+import {shareOffer,shareContent} from './share.mjs';
 
 function copyText(text){
   const field=document.createElement('textarea');
@@ -8,13 +8,13 @@ function copyText(text){
   document.body.append(field);field.select();
   try{return document.execCommand('copy');}finally{field.remove();focused?.focus?.();}
 }
-export default function ShareButton({offer}){
+export default function ShareButton({offer,data}){
   const [message,setMessage]=useState(''),[busy,setBusy]=useState(false);
   const timer=useRef();
   useEffect(()=>()=>clearTimeout(timer.current),[]);
   async function share(event){
     event.stopPropagation();if(busy)return;setBusy(true);setMessage('');
-    try{const result=await shareOffer(offer,navigator,copyText);if(result==='copied')setMessage('Текст и ссылка скопированы');}
+    try{const result=await (data?shareContent(data,navigator,copyText):shareOffer(offer,navigator,copyText));if(result==='copied')setMessage('Текст и ссылка скопированы');}
     catch{setMessage('Не удалось поделиться. Попробуйте ещё раз.');}
     finally{setBusy(false);clearTimeout(timer.current);timer.current=setTimeout(()=>setMessage(''),4500);}
   }
