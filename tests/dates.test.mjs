@@ -6,3 +6,8 @@ test('calendar Monday first, including month edges',()=>{const cells=monthCells(
 test('leap day and year boundary',()=>{assert.equal(addDays('2028-02-28',1),'2028-02-29');assert.equal(addDays('2026-12-31',1),'2027-01-01');});
 test('statistics ranges use calendar week and month',()=>{assert.deepEqual(rangeFor('week','2026-11-01'),['2026-10-26','2026-11-01']);assert.deepEqual(rangeFor('month','2028-02-15'),['2028-02-01','2028-02-29']);assert.deepEqual(rangeFor('day','2026-10-25'),['2026-10-25','2026-10-25']);});
 test('offer validation rejects missing photo, fractional discount and outside date',()=>{const p={starts_on:'2026-11-01',ends_on:'2026-11-15'},o={name:'Тан FOODFEST',image_path:'brand/sample-tan.jpg',sale_date:'2026-11-01',discount:20};assert.doesNotThrow(()=>validateOffer(o,p));assert.throws(()=>validateOffer({...o,image_path:''},p));assert.throws(()=>validateOffer({...o,discount:20.5},p));assert.throws(()=>validateOffer({...o,sale_date:'2026-11-16'},p));});
+
+test('all month dates remain visible in Moscow and eastern time zones',()=>{
+ const before=process.env.TZ;
+ try{for(const tz of ['UTC','Europe/Moscow','Asia/Vladivostok','Pacific/Auckland']){process.env.TZ=tz;for(let year=2026;year<=2028;year++)for(let month=1;month<=12;month++){const key=`${year}-${String(month).padStart(2,'0')}`,last=new Date(Date.UTC(year,month,0)).getUTCDate();const cells=monthCells(key);assert.equal(cells.includes(`${key}-${last}`),true,`${tz} ${key}`);assert.equal(cells.length%7,0);}}}finally{if(before===undefined)delete process.env.TZ;else process.env.TZ=before;}
+});

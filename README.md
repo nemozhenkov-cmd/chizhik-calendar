@@ -106,3 +106,12 @@ RLS запрещает покупателю читать статистику, �
 
 ### Новинки недели
 Четвёртый раздел `#new`: еженедельные подборки из `new_collections` / `new_items`, оригинальные фото, отдельные варианты товара, без сердечек и скидочных плашек. Поделиться — справа сверху. Ссылка «Подробнее о товаре» допускает только прямую HTTPS-страницу `chizhik.club/product/.../`; при отсутствии проверенной ссылки кнопка скрыта. Управление: админка → Новинки → подборка, товары, предпросмотр, публикация. Все отправки о подборке запускаются отдельной подтверждаемой кнопкой, один раз на подборку; используется существующая защищённая очередь. `push_broadcasts` содержит ровно один источник: календарь или подборку новинок. Миграции: `supabase/new-arrivals.sql`, `supabase/new-arrivals-push.sql`.
+
+### Buyer usability upgrade (November 2026)
+- Month cells use UTC consistently; Moscow/eastern zones retain every date. Calendar has Today/back-to-dates actions and favorite markers.
+- Compact favorites with collapsed waiting items; new arrivals banner, per-device unread marker, collapsible older weeks and original-photo lightbox. Catalogue links continue to come from the database.
+- Exact offer/new-item share URLs; the printed short URL remains unchanged.
+- Settings and help contains PWA installation, per-topic notification preferences and manual offline saving. Up to 30 near-term/favorite photos are cached automatically (skipped with data saver).
+- Apply `supabase/buyer-improvements.sql` before deploying the updated `calendar-push` function. Existing subscribers retain all three topics; reminders remain individual. Generic calendar broadcasts skip recipients whose personalized favorites notification for that period is already pending/sending/sent.
+- Feedback uses a rate-limited, idempotent Edge endpoint; original item/date are resolved server-side. Admins can read reports and update status only; anonymous clients cannot access the feedback table. No catalogue data is edited by this upgrade.
+- Verification: `npm test`, existing browser suites, `tests/buyer-upgrade-browser.mjs`, rollback-only `tests/buyer-upgrade.sql`, and `scripts/verify-push-backend.mjs`. Browser/API tests never send actual pushes.

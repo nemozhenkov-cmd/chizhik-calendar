@@ -5,6 +5,7 @@ import {browserCapabilities,enablePush,devicePushBody,pushRequest} from './push-
 import {reminderDue} from '../supabase/functions/calendar-push/policy.mjs';
 export function useReminders(){const [ids,setIds]=useState([]),[busy,setBusy]=useState(''),[message,setMessage]=useState('');const lock=useRef(false),revision=useRef(0);
 useEffect(()=>{let live=true;const rev=revision.current;(async()=>{try{const body=await devicePushBody();if(!body)return;const d=await pushRequest('reminders',body);if(live&&revision.current===rev)setIds(d.offer_ids||[]);}catch{}})();return()=>{live=false;};},[]);
+useEffect(()=>{if(!message)return;const timer=setTimeout(()=>setMessage(''),8000);return()=>clearTimeout(timer);},[message]);
 function applyResult(offer,result){setIds(old=>result.enabled?[...new Set([...old,offer.id])]:old.filter(id=>id!==offer.id));setMessage(result.already_sent?'Напоминание уже отправлено.':result.enabled?'Напомним накануне в 18:30 по Москве.':'Напоминание отменено.');}
 async function toggle(offer){if(lock.current)return;lock.current=true;revision.current++;setBusy(offer.id);setMessage('');try{const active=ids.includes(offer.id);const caps=browserCapabilities();if(caps.needsInstall)throw Error('На iPhone сначала добавьте приложение на экран «Домой» и откройте его оттуда.');if(!caps.supported)throw Error('Этот браузер не поддерживает уведомления. Откройте приложение в браузере с поддержкой push.');
 // Reuse an already connected device: saving a reminder needs just one server request.
