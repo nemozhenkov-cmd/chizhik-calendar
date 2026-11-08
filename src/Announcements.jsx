@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {Bell} from 'lucide-react';
+import {ArrowLeft,Bell} from 'lucide-react';
 import {sb,result} from './api';
 import {addDays,moscowDate} from './dates.mjs';
 import {devicePushBody,pushRequest} from './push-client.mjs';
@@ -16,9 +16,21 @@ async function adminRequest(action,data){
   return pushRequest(action,data,session.access_token);
 }
 
-export function BuyerAnnouncements({home,messages}){
+export function BuyerAnnouncements({home,messages,children}){
   const [rows,setRows]=useState([]),[error,setError]=useState(false),[now,setNow]=useState(Date.now());
+  const [read,setRead]=useState(()=>{
+    try{const ids=JSON.parse(localStorage.getItem('calendar-read-announcements'));return new Set(Array.isArray(ids)?ids:[]);}
+    catch{return new Set();}
+  });
   const target=location.hash.split('/')[1];
+  function markRead(id){
+    setRead(previous=>{
+      if(previous.has(id))return previous;
+      const next=new Set([...previous,id]);
+      try{localStorage.setItem('calendar-read-announcements',JSON.stringify([...next].slice(-500)));}catch{}
+      return next;
+    });
+  }
   useEffect(()=>{
     let active=true;
     async function refresh(){
@@ -31,12 +43,30 @@ export function BuyerAnnouncements({home,messages}){
     window.addEventListener('focus',refresh);
     return()=>{active=false;clearInterval(timer);window.removeEventListener('focus',refresh);};
   },[]);
-  useEffect(()=>{if(messages&&target)document.getElementById('message-'+target)?.scrollIntoView({block:'start'});},[messages,target,rows]);
-  if(messages)return <section className="announcements"><h1>Сообщения</h1>{error&&<p>Не удалось обновить сообщения.</p>}{!error&&!rows.length&&<p>Здесь появятся объявления магазина.</p>}{rows.map(row=><article className="announcement-card" id={'message-'+row.id} key={row.id}><b>{row.title}</b><small>{new Date(row.created_at).toLocaleString('ru-RU',{timeZone:'Europe/Moscow',dateStyle:'short',timeStyle:'short'})}{row.replaced_at?' · Обновлено':''}</small><p>{row.body}</p></article>)}</section>;
+  useEffect(()=>{
+    if(messages&&target&&rows.some(row=>row.id===target)){
+      markRead(target);
+      document.getElementById('message-'+target)?.scrollIntoView({block:'start'});
+    }
+  },[messages,target,rows]);
+  if(messages)return <section className="announcements">
+    <a className="announcement-back" href="#today"><ArrowLeft size={18}/> На главную</a>
+    <h1>Сообщения</h1>
+    {error&&<p>Не удалось обновить сообщения.</p>}
+    {!error&&!rows.length&&<p>Здесь появятся объявления магазина.</p>}
+    {rows.map(row=><details className="announcement-card" id={'message-'+row.id} key={row.id} open={target===row.id?true:undefined} onToggle={e=>{if(e.currentTarget.open)markRead(row.id);}}>
+      <summary><b>{row.title}</b>{!read.has(row.id)&&<span className="announcement-unread-dot" aria-label="Непрочитано"/>}</summary>
+      <small>{new Date(row.created_at).toLocaleString('ru-RU',{timeZone:'Europe/Moscow',dateStyle:'short',timeStyle:'short'})}{row.replaced_at?' · Обновлено':''}</small>
+      <p>{row.body}</p>
+    </details>)}
+  </section>;
   if(!home)return null;
   const active=rows.filter(row=>!row.replaced_at&&(Date.parse(row.pin_until)>now||(row.pin_until===null&&['closure','delay'].includes(row.kind))));
   const pinned=active.find(row=>urgent.includes(row.kind))||active.find(row=>row.kind==='reopen')||active[0];
-  return <section className="announcements"><a className="announcement-inbox" href="#messages"><Bell size={17}/> Сообщения</a>{pinned&&<a className={`announcement-card announcement-pin ${pinned.kind}`} href={'#messages/'+pinned.id}><b>{pinned.title}</b><p>{pinned.body}</p><small>Подробнее →</small></a>}</section>;
+  const unread=rows.some(row=>!read.has(row.id));
+  return <>{children(<a className={`announcement-inbox${unread?' is-unread':''}`} href="#messages" aria-label={unread?'Есть непрочитанные сообщения':'Сообщения'}><Bell size={21} aria-hidden="true"/></a>)}
+    {pinned&&<section className="announcements"><a className={`announcement-card announcement-pin ${pinned.kind}`} href={'#messages/'+pinned.id}><b>{pinned.title}</b><p>{pinned.body}</p><small>Подробнее →</small></a></section>}
+  </>;
 }
 
 function draftText(d){
