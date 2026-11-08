@@ -111,7 +111,7 @@ export function AdminAnnouncements(){
     }catch(e){setError(e.message);}finally{setBusy(false);}
   }
   const valid=title.trim()&&title.length<=80&&text.trim()&&text.length<=280&&(!['tasting','hours'].includes(d.kind)||(d.date&&d.from&&d.to&&d.from<d.to&&Date.parse(pinUntil(d))>Date.now()));
-  return <section className="announcements announcement-admin"><h2>Уведомления</h2>
+  return <section className="announcements announcement-admin">
     <div className="announcement-actions"><button className={!history?'primary':''} onClick={()=>setHistory(false)}>Создать</button><button className={history?'primary':''} onClick={()=>setHistory(true)}>История</button></div>
     {error&&<p className="error" role="alert">{error}</p>}{message&&<p role="status">{message}</p>}
     {history?rows.map(row=>{
