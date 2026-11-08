@@ -82,3 +82,16 @@
 .admin-notification-tools{margin-bottom:22px}.admin-notification-tools>summary{display:none}.admin-notification-tools>.admin-push{margin-bottom:0}
 @media(max-width:900px){.admin-notification-tools{border:1px solid var(--line);background:#fff;border-radius:16px;overflow:hidden;margin-bottom:16px}.admin-notification-tools>summary{display:flex;align-items:center;gap:10px;padding:15px;min-height:52px;cursor:pointer;font-size:13px;font-weight:700;list-style:none}.admin-notification-tools>summary::-webkit-details-marker{display:none}.admin-notification-tools>summary:after{content:'+';font-size:22px;font-weight:400;margin-left:auto}.admin-notification-tools[open]>summary:after{content:'−'}.admin-shell .admin-notification-tools>.admin-push{border:0;border-top:1px solid var(--line);border-radius:0}.admin-shell .modal-head{position:sticky;top:-20px;padding-block:12px;background:#fff;z-index:4}.auth{width:calc(100% - 32px);max-width:410px}.auth input{font-size:16px;min-height:48px}.auth .primary{width:100%;min-height:48px}.auth h1{font-size:29px}}
 .admin-shell .stats-explainer{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}.stats-explainer>summary{cursor:pointer;font-size:13px;font-weight:700;min-height:40px;line-height:1.5;padding:9px 0}.stats-explainer>.muted-text{margin-top:8px}
+
+.announcements{display:grid;gap:12px;margin-bottom:16px}
+.announcement-inbox{justify-self:end;display:inline-flex;align-items:center;gap:7px;font-weight:700;color:inherit;padding:8px 12px;border:1px solid #ddd;border-radius:12px}
+.announcement-card{display:grid;gap:6px;padding:14px 16px;border-radius:16px;background:#f4f3f0;color:inherit;overflow-wrap:anywhere}
+.announcement-card p{margin:0;white-space:pre-line}
+.announcement-card small{color:#555}
+.announcement-pin{text-decoration:none}
+.announcement-pin:is(.closure,.delay,.hours,.tasting){background:#fff1c6}
+.announcement-pin.reopen{background:#e1f4df}
+.announcement-admin{max-width:660px}
+.announcement-admin label{display:grid;gap:5px}
+.announcement-actions{display:flex;flex-wrap:wrap;gap:8px}
+.announcement-actions button:not(.primary){padding:8px 12px;border:1px solid #ddd;border-radius:10px;background:#fff;color:#222}
