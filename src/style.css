@@ -95,3 +95,12 @@
 .announcement-admin label{display:grid;gap:5px}
 .announcement-actions{display:flex;flex-wrap:wrap;gap:8px}
 .announcement-actions button:not(.primary){padding:8px 12px;border:1px solid #ddd;border-radius:10px;background:#fff;color:#222}
+.today-intro{position:relative;padding-right:48px}
+.today-intro .announcement-inbox{position:absolute;top:0;right:0;width:44px;height:44px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:#1c1c1b}
+.today-intro .announcement-inbox.is-unread{background:#ffd400}
+.announcement-back{justify-self:start;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:700}
+.announcement-card summary{cursor:pointer}
+.announcement-card[open] summary{margin-bottom:6px}
+.announcement-card small{display:block}
+.announcement-unread-dot{display:inline-block;width:9px;height:9px;margin-left:8px;border-radius:50%;background:#ffd400}
+@media(max-width:420px){.today-intro h1{white-space:normal}.today-intro .mascot-wrap,.today-intro .mascot-wrap img{width:56px;height:56px}}
