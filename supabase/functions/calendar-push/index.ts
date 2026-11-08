@@ -7,7 +7,7 @@ function checked(r:any){if(r.error)throw new Error('Database operation failed');
 async function config(){let row=checked(await db.from('push_config').select('*').eq('id',1).single());if(!row.public_key){const pair=webpush.generateVAPIDKeys();checked(await db.from('push_config').update({public_key:pair.publicKey,private_key:pair.privateKey}).eq('id',1).is('public_key',null));row=checked(await db.from('push_config').select('*').eq('id',1).single());}return row;}
 async function hash(text:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text)))).map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function admin(req:Request){const token=(req.headers.get('x-admin-token')||'').replace(/^Bearer /,'');const {data:{user},error}=await db.auth.getUser(token);if(error||!user)return null;const row=checked(await db.from('admins').select('user_id').eq('user_id',user.id).maybeSingle());return row?user:null;}
-async function deliver(row:any,cfg:any){const sub=checked(await db.from('push_subscriptions').select('notify_calendar,notify_new').eq('id',row.subscription_id).maybeSingle());if(!sub||!(row.period_id?sub.notify_calendar:sub.notify_new)){checked(await db.from('push_deliveries').update({state:'expired',last_error:'preference_disabled'}).eq('id',row.delivery_id));return;}let status=0,errorCode='push_status_0',prepared=false;try{if(!validSubscription(row)){status=410;errorCode='subscription_invalid';}else{const details=webpush.generateRequestDetails({endpoint:row.endpoint,keys:row.keys},JSON.stringify(pushPayload(row)),{TTL:86400,urgency:'normal',vapidDetails:{subject:APP_URL,publicKey:cfg.public_key,privateKey:cfg.private_key}});prepared=true;const r=await fetch(details.endpoint,{method:details.method,headers:details.headers,body:details.body,redirect:'error',signal:AbortSignal.timeout(10000)});status=r.status;errorCode=`push_status_${status}`;await r.body?.cancel();}}catch(e){errorCode=!prepared?'request_preparation_failed':e instanceof Error&&e.name==='TimeoutError'?'request_timeout':'network_error';}
+async function deliver(row:any,cfg:any){const campaign=row.period_id?null:checked(await db.from('push_broadcasts').select('announcement_id').eq('id',row.broadcast_id).single());row.announcement_id=campaign?.announcement_id;const sub=checked(await db.from('push_subscriptions').select('notify_calendar,notify_new').eq('id',row.subscription_id).maybeSingle());if(!sub||!(row.announcement_id|| (row.period_id?sub.notify_calendar:sub.notify_new))){checked(await db.from('push_deliveries').update({state:'expired',last_error:'preference_disabled'}).eq('id',row.delivery_id));return;}let status=0,errorCode='push_status_0',prepared=false;try{if(!validSubscription(row)){status=410;errorCode='subscription_invalid';}else{const details=webpush.generateRequestDetails({endpoint:row.endpoint,keys:row.keys},JSON.stringify(pushPayload(row)),{TTL:86400,urgency:'normal',vapidDetails:{subject:APP_URL,publicKey:cfg.public_key,privateKey:cfg.private_key}});prepared=true;const r=await fetch(details.endpoint,{method:details.method,headers:details.headers,body:details.body,redirect:'error',signal:AbortSignal.timeout(10000)});status=r.status;errorCode=`push_status_${status}`;await r.body?.cancel();}}catch(e){errorCode=!prepared?'request_preparation_failed':e instanceof Error&&e.name==='TimeoutError'?'request_timeout':'network_error';}
 const current=checked(await db.from('push_deliveries').select('attempts').eq('id',row.delivery_id).single());const state=deliveryOutcome(status,current.attempts);checked(await db.from('push_deliveries').update({state,lease_until:new Date(Date.now()+60000).toISOString(),last_error:state==='sent'?null:errorCode}).eq('id',row.delivery_id));if(state==='expired')checked(await db.from('push_subscriptions').delete().eq('id',row.subscription_id));}
 async function deliverReminder(row:any,cfg:any){
 // Recheck cancellation, publication and current offer data immediately before sending.
@@ -69,6 +69,32 @@ if(body.action==='favorites-sync'){
  return reply(200,{enabled:r.data===true});
  }
  if(owned)checked(await db.from('push_subscriptions').delete().eq('id',owned.id));return reply(200,{subscribed:false});
+}
+if(['announcement-status','announcement-publish','announcement-test'].includes(body.action)){
+ const user=await admin(req);if(!user)return reply(403,{error:'Доступ только администратору.'});
+ if(body.action==='announcement-status'){
+   const count=await db.from('push_subscriptions').select('id',{count:'exact',head:true});
+   if(count.error)throw count.error;
+   const campaigns=checked(await db.from('push_broadcasts').select('announcement_id,total,push_deliveries(state)').not('announcement_id','is',null).order('created_at',{ascending:false}).limit(30));
+   return reply(200,{subscribers:count.count||0,campaigns});
+ }
+ if(body.action==='announcement-test'){
+   const s=body.subscription;
+   if(!validSubscription(s)||!validDeviceToken(body.device_token)||typeof body.title!=='string'||!body.title.trim()||body.title.length>80||typeof body.text!=='string'||!body.text.trim()||body.text.length>280)return reply(400,{error:'Проверьте текст и подписку устройства.'});
+   const owned=checked(await db.from('push_subscriptions').select('endpoint,keys').eq('endpoint',s.endpoint).eq('token_hash',await hash(body.device_token)).maybeSingle());
+   if(!owned||!validSubscription(owned))return reply(403,{error:'Включите уведомления на этом устройстве.'});
+   const cfg=await config();
+   const details=webpush.generateRequestDetails(owned,JSON.stringify({title:'Тест · '+body.title,body:body.text,url:APP_URL+'#messages'}),{TTL:60,vapidDetails:{subject:APP_URL,publicKey:cfg.public_key,privateKey:cfg.private_key}});
+   const response=await fetch(details.endpoint,{method:details.method,headers:details.headers,body:details.body,redirect:'error',signal:AbortSignal.timeout(10000)});
+   await response.body?.cancel();
+   return response.ok?reply(200,{ok:true}):reply(502,{error:'Push-сервис отклонил тест.'});
+ }
+ const {id,kind,title,text,pinUntil,related,push}=body;
+ if(typeof title!=='string'||!title.trim()||title.length>80||typeof text!=='string'||!text.trim()||text.length>280||typeof push!=='boolean')return reply(400,{error:'Проверьте заголовок и текст.'});
+ const response=await db.rpc('publish_announcement',{p_id:id,p_kind:kind,p_title:title.trim(),p_body:text.trim(),p_until:pinUntil||null,p_related:related||null,p_actor:user.id,p_push:push});
+ if(response.error)return reply(400,{error:response.error.message.includes('ALREADY_REPLACED')?'Объявление уже обновлено.':'Не удалось опубликовать объявление.'});
+ if(push)EdgeRuntime.waitUntil(worker().catch(()=>{}));
+ return reply(200,{ok:true});
 }
 if(['broadcast','admin-status','new-broadcast','new-admin-status'].includes(body.action)){
  const user=await admin(req);if(!user)return reply(403,{error:'Доступ только администратору.'});
