@@ -1,6 +1,6 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Bell,Check} from 'lucide-react';
-import {addDays,longDate} from './dates.mjs';
+import {addDays,longDate,moscowDate} from './dates.mjs';
 import {browserCapabilities,enablePush,devicePushBody,pushRequest} from './push-client.mjs';
 import {reminderDue} from '../supabase/functions/calendar-push/policy.mjs';
 export function useReminders(){const [ids,setIds]=useState([]),[busy,setBusy]=useState(''),[message,setMessage]=useState('');const lock=useRef(false),revision=useRef(0);
@@ -16,4 +16,4 @@ if(active){setIds([]);setMessage('Уведомления на этом устр�
 const connection=await enablePush();if(!connection.subscribed)throw Error('Разрешите уведомления в настройках браузера, чтобы получать напоминания.');body=await devicePushBody();if(!body)throw Error('Не удалось подключить уведомления.');const result=await pushRequest('reminder',{...body,offer_id:offer.id,enabled:true});applyResult(offer,result);
 }catch(e){setMessage(e.message||'Не удалось сохранить напоминание. Повторите при подключении к интернету.');}finally{lock.current=false;setBusy('');}}
 return {ids,busy,message,toggle,dismiss:()=>setMessage('')};}
-export default function ReminderButton({offer,controller}){const active=controller.ids.includes(offer.id);if(!active&&Date.now()>=reminderDue(offer.sale_date))return null;return <button className={`reminder-button ${active?'reminder-active':''}`} aria-pressed={active} aria-label={`${active?'Отменить напоминание':'Напомнить'}: ${offer.name}`} disabled={!!controller.busy} onClick={()=>controller.toggle(offer)}>{active?<Check size={19}/>:<Bell size={19}/>}<span><b>{controller.busy===offer.id?'Сохраняем…':active?'Напоминание включено':'Напомнить об акции'}</b>{active&&<small>{longDate(addDays(offer.sale_date,-1))}, 18:30 МСК</small>}</span></button>;}
+export default function ReminderButton({offer,controller}){const active=controller.ids.includes(offer.id);if(!active&&Date.now()>=reminderDue(offer.sale_date))return offer.sale_date>=moscowDate()?<p className="muted-text reminder-deadline">Время напоминания прошло</p>:null;return <button className={`reminder-button ${active?'reminder-active':''}`} aria-pressed={active} aria-label={`${active?'Отменить напоминание':'Напомнить'}: ${offer.name}`} disabled={!!controller.busy} onClick={()=>controller.toggle(offer)}>{active?<Check size={19}/>:<Bell size={19}/>}<span><b>{controller.busy===offer.id?'Сохраняем…':active?'Отменить напоминание':'Напомнить об акции'}</b>{active&&<small>Напомним {longDate(addDays(offer.sale_date,-1))} в 18:30 МСК</small>}</span></button>;}
