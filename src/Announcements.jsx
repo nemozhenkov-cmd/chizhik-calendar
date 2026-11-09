@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
-import {ArrowLeft,Bell} from 'lucide-react';
+import {ArrowLeft,Bell,Settings} from 'lucide-react';
+import NotificationPreferences from './NotificationPreferences';
 import {sb,result} from './api';
 import {addDays,moscowDate} from './dates.mjs';
 import {devicePushBody,pushRequest} from './push-client.mjs';
@@ -22,6 +23,7 @@ export function BuyerAnnouncements({home,messages,children}){
     try{const ids=JSON.parse(localStorage.getItem('calendar-read-announcements'));return new Set(Array.isArray(ids)?ids:[]);}
     catch{return new Set();}
   });
+  const [settings,setSettings]=useState(false);
   const target=location.hash.split('/')[1];
   function markRead(id){
     setRead(previous=>{
@@ -51,13 +53,15 @@ export function BuyerAnnouncements({home,messages,children}){
   },[messages,target,rows]);
   if(messages)return <section className="announcements">
     <a className="announcement-back" href="#today"><ArrowLeft size={18}/> На главную</a>
-    <h1>Сообщения</h1>
+    <div className="section-head"><h1>Сообщения</h1><button className="icon-btn" type="button" aria-label="Настройки уведомлений" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Settings size={20}/></button></div>
+    {settings&&<NotificationPreferences/>}
     {error&&<p>Не удалось обновить сообщения.</p>}
     {!error&&!rows.length&&<p>Здесь появятся объявления магазина.</p>}
     {rows.map(row=><details className="announcement-card" id={'message-'+row.id} key={row.id} open={target===row.id?true:undefined} onToggle={e=>{if(e.currentTarget.open)markRead(row.id);}}>
       <summary><b>{row.title}</b>{!read.has(row.id)&&<span className="announcement-unread-dot" aria-label="Непрочитано"/>}</summary>
       <small>{new Date(row.created_at).toLocaleString('ru-RU',{timeZone:'Europe/Moscow',dateStyle:'short',timeStyle:'short'})}{row.replaced_at?' · Обновлено':''}</small>
       <p>{row.body}</p>
+      {rows.find(next=>next.related_id===row.id)&&<a className="text-link" href={'#messages/'+rows.find(next=>next.related_id===row.id).id}>Открыть обновление →</a>}
     </details>)}
   </section>;
   if(!home)return null;
