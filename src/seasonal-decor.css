@@ -2,7 +2,7 @@
 .season-weather{position:fixed;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
 .season-particle{position:absolute;top:-26px;left:var(--particle-x);animation:season-fall var(--particle-duration) var(--particle-delay) linear infinite}
 .season-particle i{display:block;width:var(--particle-size);height:var(--particle-size);font:normal var(--particle-size)/1 system-ui;animation:season-turn 4s ease-in-out infinite alternate}
-.season-autumn{
+.season-autumn,.season-favorite-effect.autumn{
   --maple:polygon(50% 0,62% 28%,77% 16%,74% 42%,100% 35%,89% 59%,100% 69%,56% 81%,52% 100%,46% 100%,45% 81%,0 69%,13% 57%,0 35%,27% 42%,23% 16%,38% 28%);
   --oak:polygon(50% 0,66% 10%,66% 23%,88% 25%,94% 39%,82% 49%,98% 55%,91% 68%,74% 69%,77% 83%,56% 87%,52% 100%,47% 100%,45% 87%,24% 83%,26% 69%,9% 68%,2% 55%,18% 49%,6% 39%,12% 25%,34% 23%,34% 10%);
   --birch:polygon(50% 0,72% 18%,68% 24%,88% 39%,80% 43%,95% 56%,83% 62%,77% 75%,55% 86%,52% 100%,47% 100%,45% 86%,23% 75%,17% 62%,5% 56%,20% 43%,12% 39%,32% 24%,28% 18%);
@@ -52,10 +52,23 @@
 .season-date-effect.autumn,.season-favorite-effect.autumn{
   width:12px;height:14px;clip-path:var(--maple);background:#bd622c
 }
-.day .season-date-effect{min-height:0;top:2px;right:3px;animation:season-date-land 1.2s ease-out both}
+.selection-result{position:relative}
+.selection-result .season-date-effect{top:-7px;right:22%;animation:season-date-land 2.6s .35s ease-out both}
+.selection-result .season-date-effect.autumn{width:23px;height:28px}
+.season-autumn .favorite-item::before,.season-winter .favorite-item::before{
+  content:"";position:absolute;top:-5px;left:13px;z-index:2;pointer-events:none
+}
+.season-autumn .favorite-item::before{
+  width:16px;height:19px;clip-path:var(--maple);background:#b76832;transform:rotate(-31deg)
+}
+.season-winter .favorite-item::before{
+  width:48px;height:7px;background:linear-gradient(#fff,#e8f1f8);border-radius:70% 45% 60% 34%;
+  box-shadow:0 1px 1px #57779835
+}
 .season-date-effect.winter{left:12%;right:12%;height:4px;border-radius:60%;background:#f2faff;box-shadow:0 1px 2px #668da9}
 .season-favorite-icon{position:relative;display:inline-flex}
-.season-favorite-effect{top:-4px;right:-5px;animation:season-heart-spark 850ms ease-out both}
+.season-favorite-effect{top:-4px;right:-5px;animation:season-heart-spark 1.2s ease-out both}
+.season-favorite-effect.autumn{width:16px;height:19px}
 .season-favorite-effect.winter{color:#3a769e;font:normal 15px/1 system-ui}
 @keyframes season-date-land{
   0%{opacity:0;transform:translate(-5px,-8px) rotate(-24deg)}
