@@ -33,3 +33,41 @@
   .season-weather,.season-pompom-flake{display:none}
   .season-mascot-art,.season-autumn .today-layout:before,.season-autumn .new-banner:before,.season-winter .today-layout:before,.season-winter .new-banner:before{animation:none}
 }
+
+.buyer .new-collection{position:relative}
+.season-autumn .new-collection::before,
+.season-winter .new-collection::before{
+  content:"";position:absolute;z-index:2;pointer-events:none
+}
+.season-autumn .new-collection::before{
+  left:74%;top:-12px;width:18px;height:22px;clip-path:var(--oak);
+  background:#b3832d;animation:season-leaf-landing 12s infinite
+}
+.season-winter .new-collection::before{
+  left:68%;top:-3px;width:24%;height:5px;border-radius:70% 45% 60% 34%;
+  background:linear-gradient(#fff,#e8f1f8);box-shadow:0 1px 1px #57779835;
+  transform-origin:bottom;animation:season-snow-settle 8s both
+}
+.season-date-effect,.season-favorite-effect{position:absolute;pointer-events:none;z-index:2}
+.season-date-effect.autumn,.season-favorite-effect.autumn{
+  width:12px;height:14px;clip-path:var(--maple);background:#bd622c
+}
+.day .season-date-effect{min-height:0;top:2px;right:3px;animation:season-date-land 1.2s ease-out both}
+.season-date-effect.winter{left:12%;right:12%;height:4px;border-radius:60%;background:#f2faff;box-shadow:0 1px 2px #668da9}
+.season-favorite-icon{position:relative;display:inline-flex}
+.season-favorite-effect{top:-4px;right:-5px;animation:season-heart-spark 850ms ease-out both}
+.season-favorite-effect.winter{color:#3a769e;font:normal 15px/1 system-ui}
+@keyframes season-date-land{
+  0%{opacity:0;transform:translate(-5px,-8px) rotate(-24deg)}
+  28%,68%{opacity:1;transform:translate(0,0)}
+  100%{opacity:0;transform:translate(0,0)}
+}
+@keyframes season-heart-spark{
+  0%{opacity:0;transform:scale(.5)}
+  28%{opacity:1}
+  100%{opacity:0;transform:translate(6px,-11px) rotate(20deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .season-date-effect,.season-favorite-effect{display:none}
+  .season-autumn .new-collection::before,.season-winter .new-collection::before{animation:none}
+}
