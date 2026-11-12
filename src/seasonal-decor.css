@@ -1,0 +1,40 @@
+.buyer.season-autumn,.buyer.season-winter{position:relative;isolation:isolate}
+.season-weather{position:fixed;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+.season-particle{position:absolute;top:-26px;left:var(--particle-x);animation:season-fall var(--particle-duration) var(--particle-delay) linear infinite}
+.season-particle i{display:block;width:var(--particle-size);height:var(--particle-size);font:normal var(--particle-size)/1 system-ui;animation:season-turn 4s ease-in-out infinite alternate}
+.season-autumn{
+  --maple:polygon(50% 0,62% 28%,77% 16%,74% 42%,100% 35%,89% 59%,100% 69%,56% 81%,52% 100%,46% 100%,45% 81%,0 69%,13% 57%,0 35%,27% 42%,23% 16%,38% 28%);
+  --oak:polygon(50% 0,66% 10%,66% 23%,88% 25%,94% 39%,82% 49%,98% 55%,91% 68%,74% 69%,77% 83%,56% 87%,52% 100%,47% 100%,45% 87%,24% 83%,26% 69%,9% 68%,2% 55%,18% 49%,6% 39%,12% 25%,34% 23%,34% 10%);
+  --birch:polygon(50% 0,72% 18%,68% 24%,88% 39%,80% 43%,95% 56%,83% 62%,77% 75%,55% 86%,52% 100%,47% 100%,45% 86%,23% 75%,17% 62%,5% 56%,20% 43%,12% 39%,32% 24%,28% 18%);
+}
+.season-particle.maple i{clip-path:var(--maple);background:#bb592e}
+.season-particle.oak i{clip-path:var(--oak);background:#a96537}
+.season-particle.birch i{clip-path:var(--birch);background:#d59a28}
+.season-flake{color:#668da9;opacity:.65}
+.season-mascot-image{position:relative;display:block;line-height:0}
+.season-umbrella,.season-outfit{position:absolute;inset:0;pointer-events:none}
+.season-umbrella{transform-origin:16% 44%;animation:season-umbrella 12s infinite}
+.season-umbrella:before{content:"";position:absolute;left:-14%;top:-6%;width:57%;height:24%;background:repeating-linear-gradient(100deg,#ffd400 0 17%,#ffdf45 17% 27%);border:1px solid #634d06;border-radius:90% 90% 12% 12%}
+.season-umbrella:after{content:"";position:absolute;left:15%;top:16%;height:29%;width:2px;background:#49412b}
+.season-beanie{position:absolute;left:28%;top:1%;width:54%;height:24%;background:repeating-linear-gradient(105deg,#ffd400 0 4px,#e5ae13 4px 5px);border:1px solid #6c510b;border-radius:68% 65% 20% 22%;transform:rotate(7deg)}
+.season-beanie:after{content:"";position:absolute;width:25%;aspect-ratio:1;top:-31%;left:48%;border-radius:50%;background:#ffd400;border:1px solid #87671d}
+.season-scarf,.season-scarf-tail{position:absolute;top:63%;height:11%;background:#30302e;border:1px solid #706c63;border-radius:12px}
+.season-scarf{left:29%;width:55%;transform:rotate(-8deg)}
+.season-scarf-tail{left:73%;width:35%;background:linear-gradient(90deg,#30302e 69%,#ffd400 70% 79%,#30302e 80%);transform-origin:left;animation:season-scarf 2.5s ease-in-out infinite alternate}
+.season-pompom-flake{position:absolute;left:56%;top:-9%;font:normal 13px/1 system-ui;color:#527d9a;animation:season-pompom 9s infinite}
+.season-autumn .today-layout,.season-autumn .new-banner,.season-winter .today-layout,.season-winter .new-banner{position:relative}
+.season-autumn .today-layout:before,.season-autumn .new-banner:before{content:"";position:absolute;z-index:2;top:-12px;left:12%;width:19px;height:23px;pointer-events:none;clip-path:var(--maple);background:linear-gradient(80deg,#bb592e 48%,#874522 50%,#bb592e 55%);animation:season-leaf-landing 12s infinite}
+.season-autumn .new-banner:before{left:77%;clip-path:var(--oak);background:#b3832d;animation-delay:2s}
+.season-winter .today-layout:before,.season-winter .new-banner:before{content:"";position:absolute;z-index:2;top:-4px;left:8%;width:27%;height:7px;pointer-events:none;background:linear-gradient(#fff,#eef6fc);border-radius:50% 80% 50% 33%;box-shadow:0 1px 1px #57779835;transform-origin:bottom;animation:season-snow-settle 8s both}
+.season-winter .new-banner:before{left:68%;width:24%;height:5px;animation-delay:2s}
+@keyframes season-fall{0%{transform:translate(0,0)}45%{transform:translate(var(--particle-sway),45vh)}100%{transform:translate(0,105vh)}}
+@keyframes season-turn{from{transform:rotate(-35deg)}to{transform:rotate(110deg)}}
+@keyframes season-umbrella{0%,52%,100%{transform:rotate(-14deg)}60%{transform:rotate(12deg)}68%{transform:rotate(3deg)}76%{transform:rotate(-14deg)}}
+@keyframes season-leaf-landing{0%{opacity:0;transform:translate(-16px,-70px) rotate(-80deg)}12%{opacity:1}34%{transform:translateY(2px) rotate(-30deg)}40%,52%{transform:rotate(-30deg);opacity:1}60%{transform:translate(16px,-9px) rotate(8deg);opacity:1}78%,100%{transform:translate(84px,-48px) rotate(160deg);opacity:0}}
+@keyframes season-scarf{from{transform:rotate(-16deg) scaleY(.85)}to{transform:rotate(9deg)}}
+@keyframes season-pompom{0%,100%{opacity:0;transform:translate(-8px,-20px)}12%{opacity:1}32%,52%{opacity:1;transform:translate(0,0)}70%{opacity:0;transform:translate(26px,19px) rotate(90deg)}}
+@keyframes season-snow-settle{from{transform:scaleY(.2);opacity:.4}to{transform:scaleY(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  .season-weather,.season-pompom-flake{display:none}
+  .season-umbrella,.season-scarf-tail,.season-autumn .today-layout:before,.season-autumn .new-banner:before,.season-winter .today-layout:before,.season-winter .new-banner:before{animation:none}
+}
