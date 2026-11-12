@@ -1,45 +1,24 @@
 .birthday-scene{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(85px,39%);align-items:center;
-  gap:9px;background:#f2efe6;border:1px solid #e9e3d5;border-radius:18px;
-  margin:0 0 14px;padding:9px 12px 8px;overflow:hidden
+  margin:0 0 14px;border-radius:18px;overflow:hidden
 }
-.birthday-scene.birthday-today{background:#ffd400;border-color:#ffd400}
-.birthday-bubble{
-  position:relative;width:fit-content;max-width:100%;margin:0;padding:11px 12px;
-  background:#fffefa;color:#181817;border-radius:16px;box-shadow:0 3px 10px #0001;
-  font-size:clamp(15px,4.5vw,22px);font-weight:800;line-height:1.2;letter-spacing:-.025em
-}
-.birthday-bubble::after{content:"";position:absolute;right:-7px;bottom:14px;width:13px;height:13px;background:#fffefa;transform:rotate(45deg)}
-.birthday-bubble span{display:block;white-space:nowrap;font-size:.78em;margin-top:5px;letter-spacing:0}
-.birthday-bird{
-  display:block;width:min(100%,132px);aspect-ratio:3/4;justify-self:center;
-  background:url('/brand/mascot-birthday.webp') left center / 200% auto no-repeat
-}
-.birthday-bird-day{background-position:right center}
-.birthday-mascot-button{padding:0;border:0;background:none;width:min(100%,132px);justify-self:center}
-.birthday-scene:not(.birthday-today) .birthday-bird{
-  transform-origin:45% 88%;animation:birthday-sway 4s ease-in-out infinite alternate
-}
+.birthday-scene img,.birthday-poster-art{display:block;width:100%;height:auto}
 .birthday-banner{
-  width:min(360px,calc(100% - 28px));max-height:calc(100% - 28px);box-sizing:border-box;
+  width:min(340px,calc(100% - 28px));max-height:calc(100% - 28px);box-sizing:border-box;
   isolation:isolate;overflow:auto;background:#191919;color:#fffefa;
-  border:2px solid #ffd400;border-radius:20px;padding:19px 17px 16px;
+  border:0;border-radius:20px;padding:0 0 14px;
   box-shadow:0 24px 58px #0008
 }
 .birthday-banner::backdrop{background:#141410a0;backdrop-filter:blur(2px)}
-.birthday-banner h2{margin:0;padding-right:26px;font-size:clamp(22px,7vw,29px);line-height:1.05;letter-spacing:-.04em}
-.birthday-close{position:absolute;top:7px;right:8px;width:44px;height:44px;border:0;background:none;color:inherit;font-size:25px}
-.birthday-poster{display:grid;grid-template-columns:.8fr 1fr;align-items:end;gap:4px;margin:9px 0 8px}
-.birthday-poster strong{display:grid;align-self:center;line-height:.91;color:#ffd400;font-size:34px;letter-spacing:-.05em}
-.birthday-poster b{font-size:clamp(76px,29vw,124px);letter-spacing:-.09em}
-.birthday-poster .birthday-bird{width:min(100%,160px)}
-.birthday-banner p{font-size:13px;margin:0 0 11px;color:#fffefa}
-.birthday-cta{width:100%;min-height:44px}
-.birthday-confetti{position:absolute;inset:10px 0 0;pointer-events:none;z-index:-1;overflow:hidden}
+.birthday-close{
+  position:absolute;top:5px;right:5px;z-index:2;width:44px;height:44px;border:0;
+  border-radius:50%;background:#191919e8;color:#fffefa;font-size:25px
+}
+.birthday-close:focus-visible{outline:2px solid #ffd400;outline-offset:-7px}
+.birthday-cta{width:calc(100% - 28px);min-height:44px;margin:0 14px}
+.birthday-confetti{position:absolute;inset:10px 0 0;pointer-events:none;z-index:1;overflow:hidden}
 .birthday-confetti i{position:absolute;top:0;width:5px;height:9px;border-radius:1px;background:#ffd400;opacity:0;animation:birthday-confetti 1.4s var(--delay) ease-out both}
 .birthday-confetti i:nth-child(even){background:#fffefa}
 .birthday-preview-links{display:flex;flex-wrap:wrap;gap:8px}
 .birthday-preview-label{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 10px;font-size:13px}
-@keyframes birthday-sway{from{transform:rotate(-2deg)}to{transform:rotate(3deg)}}
 @keyframes birthday-confetti{15%{opacity:1}100%{opacity:0;transform:translate(15px,215px) rotate(210deg)}}
-@media(prefers-reduced-motion:reduce){.birthday-scene:not(.birthday-today) .birthday-bird,.birthday-confetti i{animation:none}}
+@media(prefers-reduced-motion:reduce){.birthday-confetti i{animation:none}}
