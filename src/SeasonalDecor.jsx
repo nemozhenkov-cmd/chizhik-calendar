@@ -30,13 +30,9 @@ export function SeasonalWeather({season}){
   </div>;
 }
 
-export function SeasonalMascotAccessories({season}){
-  if(season==='autumn')return <span className="season-umbrella" aria-hidden="true"/>;
-  if(season==='winter')return <span className="season-outfit" aria-hidden="true">
-    <i className="season-beanie"/>
-    <i className="season-scarf"/>
-    <i className="season-scarf-tail"/>
-    <i className="season-pompom-flake">❅</i>
+export function SeasonalMascot({season}){
+  return <span className={`season-mascot-image season-mascot-${season}`} aria-hidden="true">
+    <span className="season-mascot-art"/>
+    {season==='winter'&&<i className="season-pompom-flake">❅</i>}
   </span>;
-  return null;
 }
