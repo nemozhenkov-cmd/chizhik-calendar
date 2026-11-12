@@ -11,17 +11,13 @@
 .season-particle.oak i{clip-path:var(--oak);background:#a96537}
 .season-particle.birch i{clip-path:var(--birch);background:#d59a28}
 .season-flake{color:#668da9;opacity:.65}
-.season-mascot-image{position:relative;display:block;line-height:0}
-.season-umbrella,.season-outfit{position:absolute;inset:0;pointer-events:none}
-.season-umbrella{transform-origin:16% 44%;animation:season-umbrella 12s infinite}
-.season-umbrella:before{content:"";position:absolute;left:-14%;top:-6%;width:57%;height:24%;background:repeating-linear-gradient(100deg,#ffd400 0 17%,#ffdf45 17% 27%);border:1px solid #634d06;border-radius:90% 90% 12% 12%}
-.season-umbrella:after{content:"";position:absolute;left:15%;top:16%;height:29%;width:2px;background:#49412b}
-.season-beanie{position:absolute;left:28%;top:1%;width:54%;height:24%;background:repeating-linear-gradient(105deg,#ffd400 0 4px,#e5ae13 4px 5px);border:1px solid #6c510b;border-radius:68% 65% 20% 22%;transform:rotate(7deg)}
-.season-beanie:after{content:"";position:absolute;width:25%;aspect-ratio:1;top:-31%;left:48%;border-radius:50%;background:#ffd400;border:1px solid #87671d}
-.season-scarf,.season-scarf-tail{position:absolute;top:63%;height:11%;background:#30302e;border:1px solid #706c63;border-radius:12px}
-.season-scarf{left:29%;width:55%;transform:rotate(-8deg)}
-.season-scarf-tail{left:73%;width:35%;background:linear-gradient(90deg,#30302e 69%,#ffd400 70% 79%,#30302e 80%);transform-origin:left;animation:season-scarf 2.5s ease-in-out infinite alternate}
-.season-pompom-flake{position:absolute;left:56%;top:-9%;font:normal 13px/1 system-ui;color:#527d9a;animation:season-pompom 9s infinite}
+.season-mascot-image{position:relative;display:block;width:80px;aspect-ratio:8/9;line-height:0;isolation:isolate;mix-blend-mode:multiply}
+.season-mascot-art{position:absolute;inset:0;background:url('/brand/mascot-seasons.webp') left center/200% 100% no-repeat}
+.season-mascot-autumn .season-mascot-art{transform-origin:38% 87%;animation:season-mascot-gust 12s ease-in-out infinite}
+.season-mascot-winter .season-mascot-art{background-position:right center}
+.season-pompom-flake{position:absolute;left:57%;top:12%;font:normal 12px/1 system-ui;color:#527d9a;animation:season-pompom 9s infinite}
+@media(max-width:700px){.season-mascot-image{width:72px}}
+@media(max-width:420px){.season-mascot-image{width:56px}}
 .season-autumn .today-layout,.season-autumn .new-banner,.season-winter .today-layout,.season-winter .new-banner{position:relative}
 .season-autumn .today-layout:before,.season-autumn .new-banner:before{content:"";position:absolute;z-index:2;top:-12px;left:12%;width:19px;height:23px;pointer-events:none;clip-path:var(--maple);background:linear-gradient(80deg,#bb592e 48%,#874522 50%,#bb592e 55%);animation:season-leaf-landing 12s infinite}
 .season-autumn .new-banner:before{left:77%;clip-path:var(--oak);background:#b3832d;animation-delay:2s}
@@ -29,12 +25,11 @@
 .season-winter .new-banner:before{left:68%;width:24%;height:5px;animation-delay:2s}
 @keyframes season-fall{0%{transform:translate(0,0)}45%{transform:translate(var(--particle-sway),45vh)}100%{transform:translate(0,105vh)}}
 @keyframes season-turn{from{transform:rotate(-35deg)}to{transform:rotate(110deg)}}
-@keyframes season-umbrella{0%,52%,100%{transform:rotate(-14deg)}60%{transform:rotate(12deg)}68%{transform:rotate(3deg)}76%{transform:rotate(-14deg)}}
+@keyframes season-mascot-gust{0%,52%,100%{transform:rotate(0)}60%{transform:rotate(4deg)}68%{transform:rotate(-1.5deg)}76%{transform:rotate(0)}}
 @keyframes season-leaf-landing{0%{opacity:0;transform:translate(-16px,-70px) rotate(-80deg)}12%{opacity:1}34%{transform:translateY(2px) rotate(-30deg)}40%,52%{transform:rotate(-30deg);opacity:1}60%{transform:translate(16px,-9px) rotate(8deg);opacity:1}78%,100%{transform:translate(84px,-48px) rotate(160deg);opacity:0}}
-@keyframes season-scarf{from{transform:rotate(-16deg) scaleY(.85)}to{transform:rotate(9deg)}}
 @keyframes season-pompom{0%,100%{opacity:0;transform:translate(-8px,-20px)}12%{opacity:1}32%,52%{opacity:1;transform:translate(0,0)}70%{opacity:0;transform:translate(26px,19px) rotate(90deg)}}
 @keyframes season-snow-settle{from{transform:scaleY(.2);opacity:.4}to{transform:scaleY(1);opacity:1}}
 @media(prefers-reduced-motion:reduce){
   .season-weather,.season-pompom-flake{display:none}
-  .season-umbrella,.season-scarf-tail,.season-autumn .today-layout:before,.season-autumn .new-banner:before,.season-winter .today-layout:before,.season-winter .new-banner:before{animation:none}
+  .season-mascot-art,.season-autumn .today-layout:before,.season-autumn .new-banner:before,.season-winter .today-layout:before,.season-winter .new-banner:before{animation:none}
 }
